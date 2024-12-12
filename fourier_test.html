@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tests Fourier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <main>
+        <h2> Fourier Test </h2>
+        <canvas id="c" width="400" height="400"></canvas>
+        <div id="controls">
+            <label for="freq"> Frequency </label><input min="0" max="10" step="0.01" value="0.3" id="freq"
+                type="number">
+            <label for="cycles"> Cycles </label><input min="0" max="1000" step="0.1" value="10" id="cycles"
+                type="number">
+            <label for="dec"> Décalage </label><input min="0" max="5" step="0.1" value="1.1" id="dec" type="number">
+            <label for="z"> Zoom </label><input min="50" max="300" step="5" value="150" id="z" type="number">
+            <button id="animate"> Stop animation</button>
+        </div>
+    </main>
+    <script src="fourier_script.js" type="module"></script>
+
+</body>
+
+</html>

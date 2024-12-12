@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: Cambria, sans-serif;
     background-color: white;
     color: #333;
     margin: 0;
@@ -12,7 +12,8 @@ header {
     padding: 20px;
 }
 main {
-    padding: 20px;
+    margin: 0 15vw;
+    line-height: 1em;
 }
 footer {
     text-align: center;
@@ -22,4 +23,11 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+button {
+    font-family: Cambria, sans-serif;
+}
+#c {
+    position: center;
 }
