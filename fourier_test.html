@@ -9,9 +9,13 @@
 </head>
 
 <body>
+    <header class="center-content">
+        <h3 onclick="window.location.href='index.html'">Little JavaScript Projects</h3>
+        <h3> Tests Fourier</h3>
+    </header>
     <main>
         <h2> Fourier Test </h2>
-        <canvas id="c" width="400" height="400"></canvas>
+        <canvas id="c" width="600" height="400"></canvas>
         <div id="controls">
             <label for="freq"> Frequency </label><input min="0" max="10" step="0.01" value="0.3" id="freq"
                 type="number">
@@ -19,9 +23,15 @@
                 type="number">
             <label for="dec"> Décalage </label><input min="0" max="5" step="0.1" value="1.1" id="dec" type="number">
             <label for="z"> Zoom </label><input min="50" max="300" step="5" value="150" id="z" type="number">
+            <label for="speed"> Speed </label><input min="1" max="10" step="1" value="1" id="speed" type="number">
             <button id="animate"> Stop animation</button>
         </div>
     </main>
+
+    <footer class="center-content">
+        <p>2024 Little JavaScript Projects</p>
+    </footer>
+
     <script src="fourier_script.js" type="module"></script>
 
 </body>

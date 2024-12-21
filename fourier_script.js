@@ -7,6 +7,7 @@ let dec = document.getElementById('dec');
 let cycles = document.getElementById('cycles');
 let animate = document.getElementById('animate');
 let z = document.getElementById('z');
+let speed = document.getElementById('speed');
 const dx = 0;
 const dy = canvas.height / 2;
 const mx = canvas.width / 2;
@@ -49,13 +50,16 @@ cycles.addEventListener('change', () => {
     drawPolar();
 });
 dec.addEventListener('change', () => {
-    decalage = parseFloat(dec.value)
+    decalage = parseFloat(dec.value);
     drawPolar();
 });
 z.addEventListener('change', () => {
-    zoom = parseInt(z.value)
+    zoom = parseInt(z.value);
     drawPolar();
 });
+speed.addEventListener('change', () => {
+    speed = parseFloat(speed.value);
+})
 
 let add = 0.001;
 let intervalId = 0;

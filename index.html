@@ -1,25 +1,41 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Little JavaScript Projects</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
 
-    <header>
-        <h1>Little JavaScript Projects</h1>
+<body>
+    <header class="center-content">
+        <h3 class="stretch">Little JavaScript Projects</h3>
     </header>
 
     <main>
-        <h2>Welcome on this website</h2>
-        <p>This is a test...</p>
+        <h2>Welcome !</h2>
+        <p>Here you can find some little javascript projects that I did.</p>
+        <p>Feel free to explore !</p>
 
-        <button onclick="window.location.href='fourier_test.html'">FourierTest</button>
+        <div class="center-content">
+            <div class="card" onclick="window.location.href='fourier_test.html'">
+                <img src="./mandala.png" height="100px" alt="">
+                <div class="card-content">
+                    <h4><b>Pretty Mandalas</b></h4>
+                </div>
+            </div>
+            <div class="card" onclick="window.location.href='curve.html'">
+                <img src="./curve.png" height="100px" alt="">
+                <div class="card-content">
+                    <h4><b>Smooth curves</b></h4>
+                </div>
+            </div>
+        </div>
     </main>
 
-    <footer>
+    <footer class="center-content">
         <p>2024 Little JavaScript Projects</p>
     </footer>
 

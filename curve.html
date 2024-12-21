@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Little JavaScript Projects</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header class="center-content">
+        <h3 onclick="window.location.href='index.html'">Little JavaScript Projects</h3>
+        <h3 class="stretch">Curves</h3>
+    </header>
+    <main>
+        <h1> Curves </h1>
+        <canvas id="c" height="400" width="600"></canvas>
+
+        <div>
+            <button id="clear"> Clear</button>
+            <button id="draw"> Draw</button>
+            <button id="loop"> Loop</button>
+        </div>
+    </main>
+    <footer class="center-content">
+        <p>2024 Little JavaScript Projects</p>
+    </footer>
+
+    <script type="module">
+        import { Vec2d } from './vector2d.js'
+        import {drawPoint, drawLine} from './canvas_drawing.js'
+
+        let canvas = document.getElementById('c');
+        let ctx = canvas.getContext('2d');
+
+        let clear = document.getElementById('clear');
+        let draw = document.getElementById('draw');
+        let loop = document.getElementById('loop');
+
+        /**
+         * Interpolate between p1 and p2
+         * @param {Vec2d} p1
+         * @param {Vec2d} p01
+         * @param {Vec2d} p02
+         * @param {Vec2d} p2
+         * @param {number} i
+         */
+        function interinter(p1, p01, p02, p2, i) {
+            return ((p1.inter(p01))(i)).inter((p02.inter(p2))(i))(i)
+        }
+
+        function interinter_2(j) {
+            return function (p1, p01, p02, p2, i) {
+                let p11 = p01.inter(p1)(j)
+                let p21 = p02.inter(p2)(j)
+                return interinter(p1, p11, p21, p2, i)
+            }
+        }
+
+        function curve(n, p1, p01, p02, p2, inter_f = interinter) {
+            let p_prec = inter_f(p1, p01, p02, p2, 0)
+            for (let i = 1; i <= n; ++i) {
+                let p = inter_f(p1, p01, p02, p2, i / n)
+                drawLine(ctx, p_prec, p)
+                p_prec = p
+            }
+        }
+
+        function drawCurve(pts, loop, inter_f = interinter) {
+            const curveDef = 20
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            for (let p of pts) {
+                drawPoint(ctx, p)
+            }
+            if (pts.length < 3) return;
+            for (let i = 2; i < pts.length; ++i) {
+                let p1 = pts[i - 2].mid(pts[i - 1])
+                let p2 = pts[i - 1].mid(pts[i])
+                curve(curveDef, p1, pts[i - 1], pts[i - 1], p2, inter_f)
+            }
+            if (pts.length > 3 && loop) {
+                const l = pts.length - 1
+                let p1 = pts[l - 1].mid(pts[l])
+                let p2 = pts[l].mid(pts[0])
+                curve(curveDef, p1, pts[l], pts[l], p2, inter_f)
+                p1 = pts[l].mid(pts[0])
+                p2 = pts[0].mid(pts[1])
+                curve(curveDef, p1, pts[0], pts[0], p2, inter_f)
+            }
+        }
+
+        let numCurves = 0
+        function curves_1(pts) {
+            if (pts.length !== 0 && pts.length % 4 === 0) {
+                //console.log(pts[4 * numCurves], pts[4 * numCurves + 1], pts[4 * numCurves + 2], pts[4 * numCurves + 3])
+                curve(40, pts[4 * numCurves], pts[4 * numCurves + 1], pts[4 * numCurves + 2], pts[4 * numCurves + 3])
+                numCurves++
+            }
+        }
+
+        // main
+        let points = []
+        let boucle = false
+
+        drawCurve([new Vec2d(100, 100), new Vec2d(100, 200), new Vec2d(200, 200), new Vec2d(200, 100)], true, interinter_2(0.2))
+
+        clear.addEventListener('click', () => {
+            points = []
+            numCurves = 0
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+        })
+        loop.addEventListener('click', () => {
+            boucle = !boucle
+            drawCurve(points, boucle)
+        })
+
+        draw.addEventListener('click', () => {
+            drawCurve(points, boucle)
+        })
+
+        canvas.addEventListener("click", (ev) => {
+            let new_p = new Vec2d(ev.offsetX, ev.offsetY)
+            //console.log(new_p.toString())
+            points.push(new_p)
+
+            drawPoint(ctx, new_p)
+            //curves_1(points, new_p)
+        })
+
+    </script>
+</body>
+
+</html>
